@@ -60,7 +60,9 @@ adapter.on('stateChange', function (id, state) {
 
 function main() {
 	adapter.log.info("Main");
-	blynk = new BlynkLib.Blynk(adapter.config.auth, {"addr":adapter.config.server,"port":adapter.config.port});
+	
+	var tcpCLient = new BlynkLib.TcpClient({"addr":adapter.config.server,"port":adapter.config.port});
+	blynk = new BlynkLib.Blynk(adapter.config.auth, {connector: tcpClient});
 	
 	// Understand existing virtual Pins
 	adapter.getStatesOf('', '', function (err, _states) {
